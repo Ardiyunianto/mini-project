@@ -5,26 +5,138 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CRUD</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-    <form action="http://localhost:8000/tasks" method="post">
-      <input id="name" name="name" type="text" placeholder="name" />
-      <input id="pic" name="pic" type="text" placeholder="pic" />
-      <input id="deadline" name="Deadline" type="text" placeholder="deadline" />
-      <input id="status" name="status" type="text" placeholder="status" />
-      <button type="submit">Submit</button>
-    </form>
-    <form action="http://localhost:8000/tasks/edit" method="post">
-      <input id="id" name="id" type="text" placeholder="id" />
-      <input id="name" name="name" type="text" placeholder="name" />
-      <input id="pic" name="pic" type="text" placeholder="pic" />
-      <input id="deadline" name="Deadline" type="text" placeholder="deadline" />
-      <input id="status" name="status" type="text" placeholder="status" />
-      <button type="submit">Submit</button>
-    </form>
-    <div id="tasks">
-      <ul></ul>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <hr />
+          <h3>List</h3>
+          <hr />
+          <div id="tasks">
+            <ul></ul>
+          </div>
+        </div>
+        <div class="col-sm">
+          <hr />
+          <h3>POST</h3>
+          <hr />
+          <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Name</label>
+              <input
+              name="name"
+                type="text"
+                class="form-control"
+                id="namePost"
+                aria-describedby="nameHelp"
+                placeholder="Enter name"
+              />
+              <br />
+              <label for="exampleInputEmail1">Pic</label>
+              <input
+                type="text"
+                name="pic"
+                class="form-control"
+                id="picPost"
+                aria-describedby="picHelp"
+                placeholder="Enter pic"
+              />
+              <br />
+              <label for="exampleInputEmail1">Deadline</label>
+              <input
+                type="text"
+                name="deadline"
+                class="form-control"
+                id="deadlinePost"
+                aria-describedby="deadlineHelp"
+                placeholder="Enter deadline"
+              />
+              <br />
+              <label for="exampleInputEmail1">Status</label>
+              <input
+                type="number"
+                name="status"
+                class="form-control"
+                id="statusPost"
+                aria-describedby="statusHelp"
+                placeholder="Enter status"
+              />
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary" onClick="postTask()">Submit</button>
+          </form>
+        </div>
+        <div class="col-sm">
+          <hr />
+          <h3>EDIT</h3>
+          <hr />
+          <form action="http://localhost:8000/tasks/edit" method="post">
+            <div class="form-group">
+              <label for="exampleInputEmail1">ID</label>
+              <input
+                type="text"
+                name="id"
+                class="form-control"
+                id="exampleInputname1"
+                aria-describedby="nameHelp"
+                placeholder="Enter id"
+              />
+              <br />
+            <div class="form-group">
+              <label for="exampleInputEmail1">Name</label>
+              <input
+                type="text"
+                name="name"
+                class="form-control"
+                id="exampleInputname1"
+                aria-describedby="nameHelp"
+                placeholder="Enter name"
+              />
+              <br />
+              <label for="exampleInputEmail1">Pic</label>
+              <input
+                type="text"
+                name="pic"
+                class="form-control"
+                id="exampleInputpic1"
+                aria-describedby="picHelp"
+                placeholder="Enter pic"
+              />
+              <br />
+              <label for="exampleInputEmail1">Deadline</label>
+              <input
+                type="text"
+                name="deadline"
+                class="form-control"
+                id="exampleInputdeadline1"
+                aria-describedby="deadlineHelp"
+                placeholder="Enter deadline"
+              />
+              <br />
+              <label for="exampleInputEmail1">Status</label>
+              <input
+                type="number"
+                name="status"
+                class="form-control"
+                id="exampleInputstatus1"
+                aria-describedby="statusHelp"
+                placeholder="Enter status"
+              />
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
     </div>
+    <div class="container"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
       $.get("http://localhost:8000/tasks", function (data, status) {
@@ -32,10 +144,25 @@
         for (let i = 0; i < data.items.length; i++) {
           console.log("test");
           $("#tasks ul").append(
-            `<li>ID : ${data.items[i].id} - NAME : ${data.items[i].name} - PIC : ${data.items[i].pic} DEADLINE : ${data.items[i].deadline} - STATUS : ${data.items[i].status} <a href="http://localhost:8000/tasks/${data.items[i].id}/delete">Delete</a> </li>`
+            `<li>ID : ${data.items[i].id} <br /> NAME : ${data.items[i].name} <br /> PIC : ${data.items[i].pic} DEADLINE : ${data.items[i].deadline} <br /> STATUS : ${data.items[i].status}<br /><a href="http://localhost:8000/tasks/${data.items[i].id}/delete">Hapus</a></li><br />`
           );
         }
       });
+
+      function postTask() {
+        const data = {
+            "name": $('#namePost').val(),
+            "pic": $('#picPost').val(),
+            "Deadline": $('#deadlinePost').val(),
+            "status": $('#statusPost').val()
+        }
+        $.ajax({
+            type: "POST", 
+            url: 'http://localhost:8000/tasks',
+            data: data
+        });
+        console.log('hey')
+      }
     </script>
   </body>
 </html>
