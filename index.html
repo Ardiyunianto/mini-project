@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD</title>
+  </head>
+  <body>
+    <form action="http://localhost:8000/tasks" method="post">
+      <input id="name" name="name" type="text" placeholder="name" />
+      <input id="pic" name="pic" type="text" placeholder="pic" />
+      <input id="deadline" name="Deadline" type="text" placeholder="deadline" />
+      <input id="status" name="status" type="text" placeholder="status" />
+      <button type="submit">Submit</button>
+    </form>
+    <form action="http://localhost:8000/tasks/edit" method="post">
+      <input id="id" name="id" type="text" placeholder="id" />
+      <input id="name" name="name" type="text" placeholder="name" />
+      <input id="pic" name="pic" type="text" placeholder="pic" />
+      <input id="deadline" name="Deadline" type="text" placeholder="deadline" />
+      <input id="status" name="status" type="text" placeholder="status" />
+      <button type="submit">Submit</button>
+    </form>
+    <div id="tasks">
+      <ul></ul>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $.get("http://localhost:8000/tasks", function (data, status) {
+        console.log(data.items);
+        for (let i = 0; i < data.items.length; i++) {
+          console.log("test");
+          $("#tasks ul").append(
+            `<li>ID : ${data.items[i].id} - NAME : ${data.items[i].name} - PIC : ${data.items[i].pic} DEADLINE : ${data.items[i].deadline} - STATUS : ${data.items[i].status} <a href="http://localhost:8000/tasks/${data.items[i].id}/delete">Delete</a> </li>`
+          );
+        }
+      });
+    </script>
+  </body>
+</html>
