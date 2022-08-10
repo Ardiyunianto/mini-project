@@ -1,4 +1,4 @@
 
-Individual Golang Project GOL-3
+Individual Golang Project kelas GOL-1
 
-Golang CRUD tasks
+Golang CRUD tasks 
