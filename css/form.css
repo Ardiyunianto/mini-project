@@ -1,0 +1,61 @@
+.card-headertask {
+ background-color: cornsilk;
+ padding: 6px;
+ border-style: outset;
+ margin-bottom: 0px;
+ text-align: center;
+}
+
+.card-header {
+    background-color: cornsilk;
+    text-align: center;
+    border-style: outset;
+    border-bottom-style: inherit;
+   }
+
+th {
+    text-align: center;
+    border-bottom-style: ridge;
+}
+
+td {
+    text-align: center;
+}
+
+.card-body {
+    width: 98%;
+    margin-left: 6px;
+}
+
+.giveA {
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 0;
+    margin-left: 22px;
+    width: max-content;
+    color: white;
+    background-color: red;
+    border-style: outset;
+
+}
+
+.table-striped {
+    border: crimson;
+    border-style: solid;
+}
+
+.row {
+    justify-content: space-evenly;
+    margin-bottom:20px;
+}
+
+.back {
+    text-decoration: none;
+    color: #ff0000;
+    background-color: #e9ecef;
+    padding: 5px 17px;
+    border-radius: 7px;
+    float: right;
+    padding-bottom: 12px;
+}
+
